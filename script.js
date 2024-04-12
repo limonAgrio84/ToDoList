@@ -1,10 +1,10 @@
 console.log("hello world");
-
 const $list = document.getElementById("toDo-container");
 const $toDoInput = document.getElementById("input");
 const $colorStyle = document.getElementById("colorfull");
 const $blackStyle = document.getElementById("blackStyle");
 const $whiteStyle = document.getElementById("whiteStyle");
+let textAmount = parseInt(localStorage.getItem('textAmount')) || 0;
 let themesAmount = 3;
 let contadorDivs = 0;
 
@@ -47,7 +47,9 @@ function createP(paragraph) {
   let divId = "serie" + contadorDivs;
   let pDiv = document.getElementById(divId);
   pDiv.appendChild(newParagraph);
-
+  textAmount++
+  let textValue = "text"+textAmount
+  localStorage.setItem(textValue,paragraph)
 }
 
 function deletInput() {
@@ -66,7 +68,7 @@ function creatCheckBox() {
 }
 
 
-function creatDeleteButton(task, checkBox) {
+function creatDeleteButton(task, checkBox, textValue) {
   let actualId = "theContainer" + contadorDivs;
   let allContainer = document.getElementById(actualId);
   let $task = document.getElementById(task);
@@ -79,18 +81,46 @@ function creatDeleteButton(task, checkBox) {
     newButton.remove();
     $task.remove();
     $checkBox.remove();
+    localStorage.removeItem(textValue);
   })
   allContainer.appendChild(newButton);
 
 }
 function clearAll() {
-  for (let i = 1; i <= contadorDivs; i++) {
-    console.log("el numero de divs es ", i);
-    let allDivId = "theContainer" + i;
-    let $allDiv = document.getElementById(allDivId);
-    $allDiv.remove();
+  let keysToRemove = [];
+  for (let i = 0; i < localStorage.length; i++) {
+    let key = localStorage.key(i);
+    if (key.startsWith("text")) {
+      keysToRemove.push(key);
+    }
   }
+  keysToRemove.forEach(key => {
+    localStorage.removeItem(key);
+  });
+  let containers = document.querySelectorAll(".allContainer");
+  containers.forEach(container => {
+    container.remove();
+  });
   contadorDivs = 0;
+  textAmount = null;
+}
+
+function initSesion(){
+  for (let i=0; i<=localStorage.length; i++) {
+    let textKey = "text"+i;
+    let text = localStorage.getItem(textKey);
+    if (text){
+      createD();
+      createP(text);
+      creatCheckBox();
+      let paragraphId = "serie" + contadorDivs;
+      let checkBoxId = "checkbox" + contadorDivs;
+      creatDeleteButton(paragraphId, checkBoxId, textKey);
+    }
+    else{
+      console.log("no task--")
+    }
+  }
 }
 
 function detectInput() {
@@ -129,10 +159,11 @@ function detectInput() {
       creatCheckBox();
       let paragraphId = "serie" + contadorDivs;
       let checkBoxId = "checkbox" + contadorDivs;
-      creatDeleteButton(paragraphId, checkBoxId);
+      let textValue = "text"+textAmount;
+      creatDeleteButton(paragraphId, checkBoxId,textValue);
       deletInput();
     }
   }
 }
-
+initSesion()
 $toDoInput.addEventListener("keypress", detectInput)
