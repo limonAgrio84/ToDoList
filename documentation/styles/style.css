@@ -1,0 +1,27 @@
+:root{
+  font-size: 16px;
+  font-family: Menlo;
+  --text-prymary: #b6b6b6;
+  --text-secondary: #ececec;
+  --bg-primary: #23232e;
+  --bg-secondary: #141418;
+}
+
+body{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  color: black;
+  background-color: #fff;
+  
+
+}
+
+main{
+  margin-left: 5rem;
+  padding: 1rem;
+}
+
+h1{
+  text-align: center;
+}
