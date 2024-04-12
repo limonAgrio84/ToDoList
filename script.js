@@ -107,10 +107,11 @@ function clearAll() {
 }
 
 function initSesion(){
-  for (let i=0; i<=localStorage.length; i++) {
+  let storeTask
+  for (let i=0; i<150; i++) {
     let textKey = "text"+i;
     let text = localStorage.getItem(textKey);
-    if (text){
+    if (text !== null){
       createD();
       createP(text);
       creatCheckBox();
