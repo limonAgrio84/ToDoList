@@ -1,4 +1,5 @@
-console.log("hello world");
+document.addEventListener("DOMContentLoaded", function() {
+  console.log("hello world");
 const $list = document.getElementById("toDo-container");
 const $toDoInput = document.getElementById("input");
 const $colorStyle = document.getElementById("colorfull");
@@ -167,3 +168,6 @@ function detectInput() {
 }
 initSesion()
 $toDoInput.addEventListener("keypress", detectInput)
+
+});
+
