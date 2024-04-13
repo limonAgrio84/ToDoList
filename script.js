@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
   console.log("hello world");
+const $title = document.getElementById("title");
 const $list = document.getElementById("toDo-container");
 const $toDoInput = document.getElementById("input");
 const $colorStyle = document.getElementById("colorfull");
@@ -8,11 +9,27 @@ const $whiteStyle = document.getElementById("whiteStyle");
 let textAmount = parseInt(localStorage.getItem('textAmount')) || 0;
 let themesAmount = 3;
 let contadorDivs = 0;
+let eventListenerAdded = false;
+
 
 
 function getText() {
   let text = $toDoInput.value.trim()
   return text
+}
+
+function addUser(){
+  if (localStorage.getItem("name")){
+    let username = localStorage.getItem("name");
+    $title.textContent = "Hi, "+username;
+    localStorage.setItem("isActive","1");
+  } else{
+    let username = prompt("write your name");
+    localStorage.setItem("name",username);
+    let userName = localStorage.getItem("name");
+    $title.textContent = "Hi, "+userName;
+    localStorage.setItem("isActive","1");
+  }
 }
 
 function changeStyle(idNuevoEstilo) {
@@ -79,9 +96,7 @@ function creatDeleteButton(task, checkBox, textValue) {
   newButton.className = "delete-button";
   newButton.textContent = "Delete"
   newButton.addEventListener("click", function() {
-    newButton.remove();
-    $task.remove();
-    $checkBox.remove();
+    allContainer.remove();
     localStorage.removeItem(textValue);
   })
   allContainer.appendChild(newButton);
@@ -106,22 +121,26 @@ function clearAll() {
   textAmount = null;
 }
 
-function initSesion(){
-  let storeTask
-  for (let i=0; i<150; i++) {
-    let textKey = "text"+i;
+function initSesion() {
+  for (let i = 0; i < 150; i++) {
+    let textKey = "text" + i;
     let text = localStorage.getItem(textKey);
-    if (text !== null){
-      createD();
-      createP(text);
-      creatCheckBox();
-      let paragraphId = "serie" + contadorDivs;
-      let checkBoxId = "checkbox" + contadorDivs;
-      creatDeleteButton(paragraphId, checkBoxId, textKey);
+    if (text !== null) {
+      if (document.getElementById("theContainer" + i) === null) {
+        createD();
+        createP(text);
+        creatCheckBox();
+        let paragraphId = "serie" + contadorDivs;
+        let checkBoxId = "checkbox" + contadorDivs;
+        creatDeleteButton(paragraphId, checkBoxId, textKey);
+      }
     }
-    else{
-      console.log("no task--")
-    }
+  }
+
+  let eventListenerAdded = false;
+  if (!eventListenerAdded) {
+    $toDoInput.addEventListener("keypress", detectInput);
+    eventListenerAdded = true;
   }
 }
 
@@ -154,6 +173,11 @@ function detectInput() {
       window.open("documentation/index.html", "_blank");
       deletInput();
     }
+    else if (text === "user++" || text === "--user"){
+      addUser();
+      deletInput();
+
+    }
 
     else {
       createD();
@@ -167,8 +191,13 @@ function detectInput() {
     }
   }
 }
-initSesion()
+if(localStorage.getItem("isActive"=="1")) {
+  console.log("no esta activo")
+}
+else{
+  addUser();
+}
 $toDoInput.addEventListener("keypress", detectInput)
-
+initSesion()
 });
 
