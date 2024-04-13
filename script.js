@@ -174,9 +174,16 @@ function detectInput() {
       deletInput();
     }
     else if (text === "user++" || text === "--user"){
-      addUser();
-      deletInput();
-
+      if(localStorage.getItem("isActive")==="0"){
+        addUser();
+        deletInput();
+      }else{
+        $title.textContent = "ToDo List";
+        deletInput();
+        localStorage.setItem("isActive","0");
+  
+      }
+      
     }
 
     else {
@@ -191,11 +198,11 @@ function detectInput() {
     }
   }
 }
-if(localStorage.getItem("isActive"=="1")) {
-  console.log("no esta activo")
+if(localStorage.getItem("isActive")==="1") {
+  addUser();
 }
 else{
-  addUser();
+  console.log("no esta activo")
 }
 $toDoInput.addEventListener("keypress", detectInput)
 initSesion()
