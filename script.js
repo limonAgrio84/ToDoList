@@ -152,6 +152,26 @@ function detectInput() {
       window.open("documentation/index.html", "_blank");
       deletInput();
     }
+<<<<<<< Updated upstream
+=======
+    else if (text === "user++" || text === "--user"){
+      if(localStorage.getItem("isActive")==="0"){
+        addUser();
+        deletInput();
+      }
+      else if (text === "math++" || text === "--math"){
+        window.open("calculator/index.html","_blank");
+        deletInput();
+      }
+      else{
+        $title.textContent = "ToDo List";
+        deletInput();
+        localStorage.setItem("isActive","0");
+  
+      }
+      
+    }
+>>>>>>> Stashed changes
 
     else {
       createD();

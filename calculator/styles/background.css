@@ -1,0 +1,58 @@
+/* background.css */
+.gradient1 {
+    background-image: linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+    background-size: 6rem 4rem;
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+}
+
+.gradient2 {
+    background-image: radial-gradient(circle 800px at 100% 200px, #f5c5ff, transparent);
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    z-index: -1;
+}
+
+.bg-linear-horizontal {
+    background: linear-gradient(to right, #f0f0f0 1px, transparent 1px), linear-gradient(to bottom, #f0f0f0 1px, transparent 1px);
+    background-size: 6rem 4rem;
+}
+
+/* Definir el gradiente radial */
+.bg-radial {
+    background: radial-gradient(circle 800px at 100% 200px, #d5c5ff, transparent);
+}
+
+/* main.css */
+/* Aplicar los gradientes al body */
+body {
+    position: relative; /* Necesario para el div absoluto */
+}
+
+/* Contenedor absoluto para los gradientes */
+.gradient-container {
+    position: absolute;
+    inset: 0;
+    z-index: -10;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* Contenedor para el gradiente radial */
+.radial-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: var(--grad-radial);
+}
+
+/* Aplicar los gradientes */
+.gradient-container {
+    background: var(--grad-linear-horiz);
+}

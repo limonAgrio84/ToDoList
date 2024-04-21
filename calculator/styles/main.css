@@ -1,0 +1,56 @@
+body{
+    height: 100vh;
+    color: white;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: arial;
+}
+
+.container{
+    margin: auto;
+    background-color: #2a2a2a;
+    border-radius: 15px;
+    max-width: 500px;
+    overflow: hidden;
+
+}
+
+.screen{
+    width: 100%;
+    padding: 20px;
+    padding-right: 100px;
+    font-size: 5rem;
+    text-align: right;
+    margin-left: -60px;
+    background-color: #3a3a3a;
+}
+
+
+.circle-b{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    gap: 10px;
+    padding: 30px;
+}
+
+button{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+    border: none;
+    background-color: #575757;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+button:hover{
+    background-color: rgb(141, 141, 141);
+}
+button:active{
+    background-color: lightgray;
+}
+
+.operator {
+    background-color: orange;
+}
