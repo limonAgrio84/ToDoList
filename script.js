@@ -185,6 +185,9 @@ function detectInput() {
       }
       
     }
+    else if (text === "math++" || text == "--math"){
+      window.open("https://lemoncalculator.netlify.app/", "_blank");
+    }
 
     else {
       createD();
