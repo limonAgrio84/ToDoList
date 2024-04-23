@@ -187,6 +187,11 @@ function detectInput() {
     }
     else if (text === "math++" || text == "--math"){
       window.open("https://lemoncalculator.netlify.app/", "_blank");
+      deletInput()
+    }
+    else if (text === "dino++" || text === "--dino"){
+      window.open("chrome://dino/", "_blank");
+      deletInput()
     }
 
     else {
